@@ -1,0 +1,30 @@
+{
+    "name": "Progressive Web App",
+    "short_name": "PWA",
+    "start_url": "/index.html",
+    "display": "standalone",
+    "orientation": "portrait-primary",
+    "theme_color": "#ffe1c4",
+    "background_color": "#ffe1c4",
+    "icons": [{
+            "src": "statics/android-chrome-192x192.png",
+            "type": "image/png",
+            "sizes": "192x192"
+        },
+        {
+            "src": "statics/android-chrome-512x512.png",
+            "type": "image/png",
+            "sizes": "512x512"
+        },
+        {
+            "src": "statics/favicon-16x16.png",
+            "type": "image/png",
+            "sizes": "16x16"
+        },
+        {
+            "src": "statics/favicon-32x32.png",
+            "type": "image/png",
+            "sizes": "32x32"
+        }
+    ]
+}
