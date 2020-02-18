@@ -9,7 +9,7 @@
 const staticCacheName = 'site-static';
 const assets = [
   '/',
-  '/index.js',
+  '/index.html',
   '/js/ui.js',
   '/js/main.js',
   '/pages/about.html',
@@ -19,36 +19,38 @@ const assets = [
   '/statics/android-chrome-192x192.png',
   '/statics/favicon.ico',
   'https://fonts.googleapis.com/icon?family=Material+Icons',
-  ' https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css'
+  'https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css',
+  'https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js'
 ];
 // installation event
-self.addEventListener('install', evnt => {
-  // installation msg
+self.addEventListener('install', evt => {
   // console.log('serviceWorker installed successfully...');
   // implement caches
-  evnt.waitUntil(
+  evt.waitUntil(
+    // because cashing process is async, we need to pass it to the waitUntil() method of the evt Object
     caches
       .open(staticCacheName)
       .then(cache => {
-        cache.addAll(assets);
+        console.log('Caching shell files');
+        cache.addAll(assets); //accept arr args (i.e files to cache)
+        // unlike cache.add(); take one arg (i.e file to cache)
       })
       .catch(err => console.log('Error: ', err))
   );
 });
 
 // activation event
-self.addEventListener('activate', evnt => {
+self.addEventListener('activate', evt => {
   // activation message
-  // console.log('serviceWorker activated successfully...');
+  console.log('Activated');
 });
 
 // fetch event
-self.addEventListener('fetch', evnt => {
-  // console.log('Fetch fired....!', evnt)
-  evnt.respondWith(
+self.addEventListener('fetch', evt => {
+  evt.respondWith(
     caches
-      .match(evnt.request)
-      .then(cachres => cachres || fetch(evnt.request))
+      .match(evt.request)
+      .then(cache => cache || fetch(evt.request))
       .catch(err => console.log('error: ', err))
   );
 });
